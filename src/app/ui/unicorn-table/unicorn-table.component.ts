@@ -3,6 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { IUnicornTableColumn } from '../models';
 import { IFhirPatient, IFhirPractitioner } from '@red-probeaufgabe/types';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-unicorn-table',
@@ -17,6 +18,10 @@ export class UnicornTableComponent implements OnInit {
   @Input() totalLength = 0;
   @Input() isLoading = false;
 
+
+
+  constructor(private router: Router) { }
+
   @Input()
   set entries(value: Array<IFhirPatient | IFhirPractitioner>) {
     this.dataSource.data = value;
@@ -24,5 +29,12 @@ export class UnicornTableComponent implements OnInit {
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
+  }
+
+  onRowClick(item) {
+    const id = item["id"];
+    const type = item["resourceType"];
+
+    this.router.navigate([`/detail/${type}/${id}`]);
   }
 }
