@@ -8,7 +8,7 @@ import { Observable, Subscription } from 'rxjs';
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.scss'],
 })
-export class DetailComponent implements OnInit {
+export class DetailComponent implements OnInit, OnDestroy {
 
   id: string;
   type: string;
@@ -47,5 +47,11 @@ export class DetailComponent implements OnInit {
   private prepareData(data) {
     this.data = data
     this.dataFine = this.fhirUtilService.prepareData(this.data);
+  }
+
+
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe()
   }
 }
