@@ -26,23 +26,32 @@ export class DashboardComponent {
   /*
    * Implement search on keyword or fhirSearchFn change
    **/
+  formValues: SearchFormInput = { freitext: '', filter: '' };
+
   search$: Observable<IFhirSearchResponse<IFhirPatient | IFhirPractitioner>> = this.createSearch();
 
   entries$: Observable<Array<IFhirPatient | IFhirPractitioner>> = this.createEntries();
 
   totalLength$ = this.createTotalLength();
 
+
   constructor(private siteTitleService: SiteTitleService, private searchFacade: AbstractSearchFacadeService) {
     this.siteTitleService.setSiteTitle('Dashboard');
   }
+  
+  searchFormInputChange(formValues: SearchFormInput) {
+    console.log(formValues)
+    this.formValues = formValues;
 
-  private handleError(): Observable<IFhirSearchResponse<IFhirPatient | IFhirPractitioner>> {
-    return of({ entry: [], total: 0 });
+    this.search$ = this.createSearch();
+    this.entries$ = this.createEntries();
+    this.totalLength$ = this.createTotalLength();
+
   }
 
   private createSearch(): Observable<IFhirSearchResponse<IFhirPatient | IFhirPractitioner>> {
     return this.searchFacade
-      .search(FhirSearchFn.SearchAll, '')
+      .search(FhirSearchFn.SearchAll, this.formValues.freitext)
       .pipe(
         catchError(this.handleError),
         tap((data) => {
@@ -50,6 +59,10 @@ export class DashboardComponent {
         }),
         shareReplay(),
       );
+  }
+
+  private handleError(): Observable<IFhirSearchResponse<IFhirPatient | IFhirPractitioner>> {
+    return of({ entry: [], total: 0 });
   }
 
   private createEntries(): Observable<Array<IFhirPatient | IFhirPractitioner>> {
