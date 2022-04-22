@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-detail',
@@ -6,5 +7,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./detail.component.scss'],
 })
 export class DetailComponent {
+
+  id: string;
+  private sub: any;
+
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit() {
+    this.sub = this.route.params.subscribe(params => {
+       this.id = params['id']; 
+    });
+  }
 
 }
