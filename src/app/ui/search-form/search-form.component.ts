@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-search',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./search-form.component.scss'],
 })
 export class SearchFormComponent {
-  /** Implement Search Form */
+
+  suchForm = new FormGroup({
+    freitext: new FormControl(''),
+    filter: new FormControl(''),
+  });
 }
