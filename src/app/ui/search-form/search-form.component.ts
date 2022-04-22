@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SearchFormInput } from './search-form.input';
 
 @Component({
@@ -12,13 +12,13 @@ export class SearchFormComponent implements OnInit {
   @Output() searchFormInput = new EventEmitter<SearchFormInput>();
 
   suchForm = new FormGroup({
-    freitext: new FormControl(''),
+    freitext: new FormControl('', [Validators.pattern('[a-zA-Z0-9]+')]),
     filter: new FormControl(''),
   });
 
   ngOnInit(): void {
     this.suchForm.valueChanges.subscribe((formValues: SearchFormInput) => {
-      const formValid = true;
+      const formValid = this.suchForm.valid;
       if (formValid) {
         this.searchFormInput.emit({
           filter: formValues.filter,
