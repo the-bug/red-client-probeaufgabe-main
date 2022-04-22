@@ -12,6 +12,10 @@ const routes: Routes = [
         path: 'dashboard',
         loadChildren: () => import('../dashboard/dashboard.module').then((m) => m.DashboardModule),
       },
+      {
+        path: 'detail',
+        loadChildren: () => import('../detail/detail.module').then((m) => m.DetaildModule),
+      },
       { path: 'imprint', loadChildren: () => import('../imprint/imprint.module').then((m) => m.ImprintModule) },
       { path: '**', redirectTo: '/dashboard' },
     ],
