@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AbstractSearchFacadeService } from '@red-probeaufgabe/search';
 
@@ -7,7 +7,7 @@ import { AbstractSearchFacadeService } from '@red-probeaufgabe/search';
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.scss'],
 })
-export class DetailComponent {
+export class DetailComponent implements OnInit{
 
   id: string;
   type: string;
