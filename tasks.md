@@ -48,6 +48,10 @@ Folgende Filtermöglichkeiten sollen implementiert werden:
 2. Patients (Patient)
 3. Practitioners (Ärzte)
 
+#### Anmerkungen
+- Die Loesung mit den neu erstellen mit den observern gefaellt mir nicht wirklich. Da gibts andere moeglichkeiten aber da bin ich aktuell nicht schnell genug fuer.
+- Filterung wurde mittels neuer Rest anfrage implementiert. Allerdings bin ich koennte man auch die bereits geladenen daten client seitig filtern. Das ist evtl eine Frage an den PO...
+
 ### 3. Detailansichten
 
 Beim Klick auf einen Eintrag im Table soll sich eine detaillierte Ansicht für die jeweilige Entität öffnen.
