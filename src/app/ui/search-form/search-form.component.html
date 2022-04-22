@@ -1,1 +1,22 @@
-<!-- implement search form here -->
+<form [formGroup]="suchForm">
+    <label>
+        Suche:
+        <input type="text" formControlName="freitext">
+    </label>
+
+    <select formControlName="filter">
+        <option value="1">Patients + Practitioners</option>
+        <option value="2">Patients</option>
+        <option value="3">Practitioners</option>
+    </select>
+</form>
+
+<p *ngIf="!suchForm.valid">
+    Fuer das Freitextfeld gelten folgende Regeln:
+
+    1. Es sind alle Buchstaben erlaubt (außer Umlaute `ä ü ö`)
+    2. Es sind alle Zahlen erlaubt
+    3. Es sind keine Whitespaces erlaubt
+    
+    Anmerkung: ein leerer String ist erlaubt
+</p>
