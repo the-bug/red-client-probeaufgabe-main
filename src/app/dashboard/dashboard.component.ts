@@ -40,6 +40,7 @@ export class DashboardComponent {
   }
   
   searchFormInputChange(formValues: SearchFormInput) {
+    this.isLoading = true;
     console.log(formValues)
     this.formValues = formValues;
 
