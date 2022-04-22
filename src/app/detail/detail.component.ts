@@ -9,13 +9,15 @@ import { ActivatedRoute } from '@angular/router';
 export class DetailComponent {
 
   id: string;
+  type: string;
   private sub: any;
 
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
-       this.id = params['id']; 
+      this.id = params['id']; 
+      this.type = params['type']; 
     });
   }
 

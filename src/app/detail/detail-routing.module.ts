@@ -4,7 +4,7 @@ import { DetailComponent } from './detail.component';
 
 const routes: Routes = [
   {
-    path: ':id',
+    path: ':type/:id',
     component: DetailComponent,
   },
 ];
