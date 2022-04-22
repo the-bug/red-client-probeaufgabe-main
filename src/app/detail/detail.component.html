@@ -1,3 +1,14 @@
-Patien/Arzt mit ID {{id}}
+Detailansicht fuer {{type}}: <br>
+Name: {{dataFine.name}}<br> 
+Id: {{dataFine.id}}<br>
 
-{{data | json}}
+<p *ngIf="type==='Patient'">
+    <!-- TODO: local fixen -->
+    Geburtstag: {{dataFine.birthDate | date}}<br> 
+    Gender: {{dataFine.gender}}<br> 
+    Adresse: {{dataFine.contact}}<br> 
+</p>
+
+<p *ngIf="type==='Practitioner'">
+    telecom: {{dataFine.telecom}}<br> 
+</p>

@@ -1,20 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AbstractSearchFacadeService } from '@red-probeaufgabe/search';
+import { AbstractSearchFacadeService, FhirUtilService } from '@red-probeaufgabe/search';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.scss'],
 })
-export class DetailComponent implements OnInit{
+export class DetailComponent implements OnInit {
 
   id: string;
   type: string;
-  private sub: any;
+  private sub: Subscription;
   data;
+  dataFine;
 
-  constructor(private route: ActivatedRoute, private searchFacade: AbstractSearchFacadeService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private searchFacade: AbstractSearchFacadeService,
+    private fhirUtilService: FhirUtilService) { }
+
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
@@ -23,10 +29,14 @@ export class DetailComponent implements OnInit{
 
       // TODO Fehlerbehandlung machen, wenn daten nicht gefunden wurden...
       if (this.type === 'Patient') {
-        this.searchFacade.findPatientById(this.id).subscribe(data => { this.data = data });
+        this.searchFacade.findPatientById(this.id).subscribe(data => {
+          this.prepareData(data);
+        });
       }
       else if (this.type === 'Practitioner') {
-        this.searchFacade.findPractitionerById(this.id).subscribe(data => { this.data = data });
+        this.searchFacade.findPractitionerById(this.id).subscribe(data => {
+          this.prepareData(data);
+        });
       } else {
         // TODO bessere fehlerbehandlung. evtl mut route gurds.
         console.log("falscher pfad paramter -> Programmierer ist schuld...")
@@ -34,4 +44,8 @@ export class DetailComponent implements OnInit{
     });
   }
 
+  private prepareData(data) {
+    this.data = data
+    this.dataFine = this.fhirUtilService.prepareData(this.data);
+  }
 }
