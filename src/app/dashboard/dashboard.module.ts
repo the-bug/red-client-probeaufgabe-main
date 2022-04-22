@@ -10,4 +10,4 @@ import { UiModule } from '@red-probeaufgabe/ui';
   imports: [CommonModule, UiModule, SearchModule, DashboardRoutingModule],
   exports: [DashboardComponent],
 })
-export class DashboardModule {}
+export class DashboardModule { }
