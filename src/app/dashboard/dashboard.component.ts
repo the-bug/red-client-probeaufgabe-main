@@ -26,7 +26,7 @@ export class DashboardComponent {
   /*
    * Implement search on keyword or fhirSearchFn change
    **/
-  formValues: SearchFormInput = { freitext: '', filter: '' };
+  formValues: SearchFormInput = { freitext: '', filter: FhirSearchFn.SearchAll };
 
   search$: Observable<IFhirSearchResponse<IFhirPatient | IFhirPractitioner>> = this.createSearch();
 
@@ -41,7 +41,6 @@ export class DashboardComponent {
   
   searchFormInputChange(formValues: SearchFormInput) {
     this.isLoading = true;
-    console.log(formValues)
     this.formValues = formValues;
 
     this.search$ = this.createSearch();
@@ -52,7 +51,7 @@ export class DashboardComponent {
 
   private createSearch(): Observable<IFhirSearchResponse<IFhirPatient | IFhirPractitioner>> {
     return this.searchFacade
-      .search(FhirSearchFn.SearchAll, this.formValues.freitext)
+      .search(this.formValues.filter, this.formValues.freitext)
       .pipe(
         catchError(this.handleError),
         tap((data) => {
