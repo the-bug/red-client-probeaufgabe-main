@@ -21,7 +21,9 @@ Es reicht an der entsprechenden Stelle kurz einen Kommentar zu verfassen.
 - Beim oeffnen den Anwendung kommt ein `NullInjectorError`.
 - Der erste Fehlerloesungsversuch ist ein ersetzen der abstrakten Klasse durch die konkrete und bereitstellen des Providers. Allerdings wird dabei die abstrakte Klasse ad absudrum gefuehrt.
 - Eine schönere Lösung ist, einen eigenen Provider zu schreiben. Mal schauen, ob das schnell geht.
-
+- Jetzt existiert ein provider fuer die abstrakte Klasse. Damit wird nun auch die passende Abstraktionsschicht benutzt.
+- die Deklaration des providers findet nun auch im search modul statt. (dessen existenz habe ich davor uebersehen....)
+- Man koennte jetzt auch noch die andere abstrakte Klasse passend refaktoren, damit auch hier die passnde abstraktionsschicht benutzt wird.
 
 ### 2. Erstelle eine Suchform
 
